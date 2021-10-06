@@ -10,25 +10,27 @@ class SpriteSheet():
         
         self.Name = name
         self._BasePath = f"{SPRITES_PATH}{self.Name}\\"
-        self._BaseConfig = {}
-        self._SpriteSheetData = {}
+        self._BaseConfig = self._loadConfig()
+        self._SpriteSheetData = self._loadSpriteSheetData()
 
-        if not self._loadConfig():
+        if self._BaseConfig == {}:
             return None
-        self._loadSpriteSheetData()
+        
+        for sprite in self._SpriteSheetData:
+            if self._SpriteSheetData[sprite] == None:
+                return None
     
     def _loadConfig(self):
         if not fileExists(f"{self._BasePath}_config.json"):
-            return False
-        
+            return {}
         with open(f"{self._BasePath}_config.json") as f:
-            self._BaseConfig = json.load(f)
-        
-        return True
+            return json.load(f)
     
     def _loadSpriteSheetData(self):
+        data = {}
         for sprite in self._BaseConfig["sprites"]:
-            self._SpriteSheetData[sprite] = _SpriteSheetData(self._BasePath,self._BaseConfig["sprites"][sprite])
+            data[sprite] = _SpriteSheetData(self._BasePath,self._BaseConfig["sprites"][sprite])
+        return data
 
 class _SpriteSheetData():
     def __init__(self,basepath,data):
