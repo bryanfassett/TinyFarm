@@ -1,7 +1,7 @@
 import pygame
 from pygame.constants import FULLSCREEN, RESIZABLE
 from pygame.locals import *
-from Game.Common import *
+from Game.Common import SpriteState
 from Game.Components.SpriteSheet import *
 
 # Initialize PyGAme
@@ -12,7 +12,9 @@ window = pygame.display.set_mode((SCREEN_W,SCREEN_H))
 ###################
 
 # Test Code Here
-
+actor = SpriteSheet("Character1")
+animslist = actor.getAnimationList("Idle", SpriteState.DOWN)
+animindex = 0
 ################
 
 # PyGame Game Loop
@@ -24,6 +26,7 @@ while running:
             running = False
     
     canvas.fill((0,100,100))
+
     window.blit(canvas,(0,0))
     pygame.display.update()
 

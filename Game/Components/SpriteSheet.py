@@ -42,7 +42,7 @@ class SpriteSheet():
     # animtype - type of animation category as listed under anims section in the json config. (ex: "Idle" or "Walk")
     # state - SpriteState object declaring the direction of the sprite
     def getAnimationList(self,animtype,state):
-        if not isValidType(state,SpriteState.SpriteState.LEFT) or not isValidType(animtype,""):
+        if not isValidType(state,SpriteState.LEFT) or not isValidType(animtype,""):
             return []
         return self._SpriteSheetData[animtype].Animations[state.value]
     
@@ -51,27 +51,23 @@ class SpriteSheet():
     # Params:
     # animtype - type of animation category as listed under anims section in the json config. (ex: "Idle" or "Walk")
     # animation - the name of the animation to blit on current frame (use getAnimationList to find)
-    # state - SpriteState object declaring the direction of the sprite
     # x - the x coordinate placement for the surface
     # y - the y coordinate placement for the surface
-    # w (optional) - the width of the surface
-    # h (optional) - the height of the surface
+    # scalex (optional) - image resize in pixels x
+    # scaley (optional) - image resize in pixels y
     # surface (optional) - a predefined surface may be provided. The sprite will then be blitted onto the provided surface
-    def getSpriteSurface(self,animtype,animation, state, x, y, w = 0, h = 0, surface = None):
-        if not isValidType(animtype,"") or not isValidType(animation,"") or not isValidType(state,SpriteState.SpriteState.LEFT):
+    def getSpriteSurface(self,animtype,animation, x, y, scalex = 0, scaley = 0, surface = None):
+        if not isValidType(animtype,"") or not isValidType(animation,""):
             return None
-
         jsondata = self._SpriteSheetData[animtype].JsonData
 
-        xx,yy = 0,0        
-        for key in jsondata:
+        xx,yy = 0,0               
+        for key in jsondata["frames"]:
             if key["filename"] == animation:
-                xx = key["spriteSourceSize"]["x"]
-                yy = key["spriteSourceSize"]["y"]
-                if w == 0:
-                    w = key["spriteSourceSize"]["w"]
-                if h == 0:
-                    h = key["spriteSourceSize"]["h"]
+                xx = key["frame"]["x"]
+                yy = key["frame"]["y"]
+                w = key["frame"]["w"]
+                h = key["frame"]["h"]
                 break
 
         if surface == None:
@@ -79,11 +75,15 @@ class SpriteSheet():
         
         surface.set_colorkey((0,0,0))
         surface.blit(self._SpriteSheetData[animtype].Sprite, (x,y), (xx,yy,w,h))
+
+        if not scalex == 0 or not scaley == 0:
+            surface = pygame.transform.scale(surface, (scalex,scaley))
+
         return surface
 
 class _SpriteSheetData():
     def __init__(self,basepath,data):
-        self.Sprite = pygame.image.load(f"{basepath}{data['spritesheet']}").convert()
+        self.Sprite = pygame.image.load(f"{basepath}{data['spritesheet']}").convert_alpha()
         self.JsonData = self._loadJsonData(basepath,data["json"])
         self.Animations = data["anims"]
     

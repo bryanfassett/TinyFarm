@@ -2,22 +2,22 @@
 	"sprites": {
 		"Idle": {
 			"spritesheet": "Idle.png",
-			"json": "Idle.json"
+			"json": "Idle.json",
 			"anims": {
-				"down": ["Idle-down0.png","Idle-down1.png",Idle-down2.png","Idle-down3.png"],
-				"left": ["Idle-left0.png","Idle-left1.png",Idle-left2.png","Idle-left3.png"],
-				"right": ["Idle-right0.png","Idle-right1.png",Idle-right2.png","Idle-right3.png"],
-				"up": ["Idle-up0.png","Idle-up1.png",Idle-up2.png","Idle-up3.png"],
+				"down": ["Idle-down0.png","Idle-down1.png","Idle-down2.png","Idle-down3.png"],
+				"left": ["Idle-left0.png","Idle-left1.png","Idle-left2.png","Idle-left3.png"],
+				"right": ["Idle-right0.png","Idle-right1.png","Idle-right2.png","Idle-right3.png"],
+				"up": ["Idle-up0.png","Idle-up1.png","Idle-up2.png","Idle-up3.png"]
 			}
 		},
 		"Walk": {
 			"spritesheet": "Walk.png",
-			"json": "Walk.json"
+			"json": "Walk.json",
 			"anims": {
-				"down": ["Walk-down0.png","Walk-down1.png",Walk-down2.png","Walk-down3.png"],
-				"left": ["Walk-left0.png","Walk-left1.png",Walk-left2.png","Walk-left3.png"],
-				"right": ["Walk-right0.png","Walk-right1.png",Walk-right2.png","Walk-right3.png"],
-				"up": ["Walk-up0.png","Walk-up1.png",Walk-up2.png","Walk-up3.png"],
+				"down": ["Walk-down0.png","Walk-down1.png","Walk-down2.png","Walk-down3.png"],
+				"left": ["Walk-left0.png","Walk-left1.png","Walk-left2.png","Walk-left3.png"],
+				"right": ["Walk-right0.png","Walk-right1.png","Walk-right2.png","Walk-right3.png"],
+				"up": ["Walk-up0.png","Walk-up1.png","Walk-up2.png","Walk-up3.png"]
 			}
 		}
 	}
