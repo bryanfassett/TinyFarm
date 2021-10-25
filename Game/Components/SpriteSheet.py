@@ -35,6 +35,14 @@ class SpriteSheet():
         for sprite in self._BaseConfig["sprites"]:
             data[sprite] = _SpriteSheetData(self._BasePath,self._BaseConfig["sprites"][sprite])
         return data
+
+    # Public function to return animation type options
+    def getAnimationTypes(self):
+        animtypes = []
+        for anim in self._SpriteSheetData:
+            animtypes.append(anim)
+        
+        return animtypes
     
     # Public function to return animation files available for the sprite
     #
